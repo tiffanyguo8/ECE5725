@@ -108,7 +108,30 @@
                 </div>
                 <!-- Project Two Row-->
                 <div class="row gx-0 justify-content-center">
-                    <div class="col-lg-6"><img class="img-fluid" src="assets/img/demo-image-02.jpg" alt="..." /></div>
+                    <div class="col-lg-6">
+                        <!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #f92672">import</span> <span style="color: #f8f8f2">bluetooth</span>
+
+<span style="color: #f8f8f2">hostMACAddress</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&quot;B8:27:EB:86:9F:CA&quot;</span>
+<span style="color: #f8f8f2">port</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">3</span>
+<span style="color: #f8f8f2">backlog</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">1</span>
+<span style="color: #f8f8f2">size</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">1024</span>
+<span style="color: #f8f8f2">s</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">bluetooth</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">BluetoothSocket(bluetooth</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">RFCOMM)</span>
+<span style="color: #f8f8f2">s</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">bind((hostMACAddress,</span> <span style="color: #f8f8f2">port))</span>
+<span style="color: #f8f8f2">s</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">listen(backlog)</span>
+<span style="color: #66d9ef">try</span><span style="color: #f8f8f2">:</span>
+	<span style="color: #f8f8f2">client,</span> <span style="color: #f8f8f2">clientInfo</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">s</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">accept()</span>
+	<span style="color: #66d9ef">while</span> <span style="color: #f8f8f2">True:</span>
+		<span style="color: #f8f8f2">data</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">client</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">recv(size)</span>
+		<span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">data:</span>
+			<span style="color: #66d9ef">print</span><span style="color: #f8f8f2">(data)</span>
+			<span style="color: #f8f8f2">client</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">send(data)</span>
+<span style="color: #66d9ef">except</span><span style="color: #f8f8f2">:</span>
+	<span style="color: #66d9ef">print</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;Closing socket&quot;</span><span style="color: #f8f8f2">)</span>
+	<span style="color: #f8f8f2">client</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">close()</span>
+	<span style="color: #f8f8f2">s</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">close()</span>
+</pre></div>
+
+                    </div>
                     <div class="col-lg-6 order-lg-first">
                         <div class="bg-black text-center h-100 project">
                             <div class="d-flex h-100">
