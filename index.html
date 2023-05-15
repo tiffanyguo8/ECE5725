@@ -185,6 +185,38 @@
 			    we found in the lab and glued it onto the plate to maximize friction. With these additional parts to the hat, we were able to wear the hat 
 			    during the demo.
 		    </p>
+		    <h2> Startup timing with crontab </h2>
+		    <p>
+			    One extra component we implmemented was using crontab to automatically start the client and server processes. We connected our RPis to a computer 
+			    monitor and provided power with power 
+			    cables when we were coding, but we wanted our system to eventually operate completely wirelessly using portable batteries. To achieve this goal,
+			    we needed a program that would automatically run our send.py and listen.py files on the RPis after they are rebooted. We decided to use crontab 
+			    in Linux for this. Fortunately, we had a chance to learn about and practice using crontab in Lab 4, and were already familiar with it. We began 
+			    by creating bash scripts that run send.py and listen.py; the bash files can be found in the Code Appendix section. We then tested if the bash 
+			    scripts were correctly working in a few different directories.
+		    </p>
+		    <p>
+			    We also included an automatic time-out in our send and listen code, so we can always come back to our code in case any error occurs. If the 
+			    programs didn't have the time-out feature, they would run forever once rebooted, and it would be more troublesome to debug them. After ensuring
+			    that the bash scripts were working properly, we edited the crontabs in the RPis to automatically run the bash scripts. We realized that the 
+			    bluetooth needed extra time to be set up, so running the bash scripts right at startup did not work. We decided to put a delay before the 
+			    actual code runs to accommodate this issue.
+		    </p>
+		    <br>
+		    <h1> Results and Conclusions </h1>
+		    <p>
+			    Going back to our original project goals, we successfully implemented each module within the time frame that we initially set:
+			    <ol>
+				    <li> Read gyroscope data with RPi Zero </li>
+				    <li> Send data from RPi Zero to RPi 4 through Bluetooth </li>
+				    <li> Control servo motors with RPi 4 </li>
+				    <li> Integrate all hardware </li>
+				    <li> Finish prototype and prepare for demo </li>
+		   	     </ol>
+			    Our iterative design
+			    and testing methodology helped us to build up our system accurately and reliably, which ultimately let to our successful integration of the Rat in
+			    the Hat. One unexpected problem we did encounter was the interaction of the Pi Zero's Bluetooth module with crontab during reboot which caused us to
+			    make some changes in the way we start up our system. However, we were still able to carry out a successful demonstration and bring the little rat to life. 
 		    
 		    <!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #f92672">import</span> <span style="color: #f8f8f2">bluetooth</span>
 
