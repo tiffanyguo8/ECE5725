@@ -218,6 +218,55 @@
 			    and testing methodology helped us to build up our system accurately and reliably, which ultimately let to our successful integration of the Rat in
 			    the Hat. One unexpected problem we did encounter was the interaction of the Pi Zero's Bluetooth module with crontab during reboot which caused us to
 			    make some changes in the way we start up our system. However, we were still able to carry out a successful demonstration and bring the little rat to life. 
+		    <br>
+		    <h1> Future Work </h1>
+		    <p>
+			    In our current system, the server side code consists of a process that terminates and relaunches every 3 minutes using Linux’s
+			    crontab feature. A better alternative would be to launch the process once during reboot, as we currently have to wait for up 
+			    to 3 minutes after startup for the project to start running. We weren’t able to implement starting the process at reboot using
+			    the “@reboot” feature in crontab, and we suspect this may be a consequence of the startup sequence of the Bluetooth service 
+			    relative to other Linux reboot processes. One future task we will implement is to debug this issue and allow our system to 
+			    start at reboot, which would make for a much more seamless startup sequence. 
+		    </p>
+		    <p>
+			    If given more time, we would also add additional improvements and features to the rat in the hat, such as changing the color 
+			    of the backlight depending on the actions taken by the chef, adding cooking sounds, and displaying pixel art of various dishes
+			    that are shown when the chef makes the corresponding movements with their arms. 
+		    </p>
+		    <br>
+		    <h1> Budget </h1>
+		    	      <ul>
+				    <li> 2 x Raspberry Pi Zero W = 2 x $15 = $30 </li>
+				    <li> 1 x Raspberry Pi 4 = $45 </li>
+				    <li> 1 x Flashlight = ~$8 </li>
+				    <li> 2 x IMU (HiLetgo MPU 6050) = ~$20 </li>
+				    <li> 2 x 9g Micro servo motors = ~$10 </li>
+				    <li> 3 x 16GB micro SD card = 2 x ~$5 = ~$15 </li>
+				    <li> 3 x Portable batteries = 3 x ~$15 = ~$45 </li>
+				    <li> Cardboard </li>
+				    <li> Wires & solder </li>
+				    <li> 1 x Mini breadboard </li>
+				    <li> 1 x Letter size copy paper </li>
+				    <li> 1 x paper plate </li>
+				    <li> Ribbons </li>
+				    <li> 1 x Sponge </li>
+				    <li> Velcro strips </li>
+		   	     </ul>
+		    <p>
+				Total = ~$180, but thanks to Professor Skovira who lent all the parts from the lab, we did not spend any money on this project. 
+		    </p>
+		    <br>
+		    <h1> References </h1>
+		     <ul>
+				    <li> Antti and Jonas’s code </li>
+				    <li> IMU datasheet and code </li>
+		    </ul>
+		    <br>
+		    <h1> Code Appendix </h1>
+		    include link to code
+		    <h1> Contributions & Contact </h1>
+		    <p> The workload of this projct, including design, testing, and report, was shared evenly between both members. </p>
+		    <p> contact </p>
 		    
 		    <!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #f92672">import</span> <span style="color: #f8f8f2">bluetooth</span>
 
