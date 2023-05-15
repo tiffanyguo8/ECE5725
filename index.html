@@ -73,11 +73,13 @@
 		</p>
 	    	<img src="assets/img/RemyAndLinguini.gif" alt="Remi and Linguini" width=50% height=auto/>
 	    </div>
+		<br><br><br>
 	    <div class="container px-4 px-lg-5">
 		<h1> Design and Testing </h1>
 			<p> We divided the project into 3 distinct components: gyroscopes, Bluetooth, and Servo motors. We individually implemented and tested each of these components
 				to ensure their functionality before incrementally integrating them into our final prototype.
 			</p>
+		    <br>
 		<h2> Gyroscope </h2>
 		    <p> 
 			    We received two IMUs from Prof. Skovira, which had 6 degrees of freedom. The code we used to read in the measured data from the 
@@ -97,13 +99,46 @@
 		    <code> 
 			    np.arctan2(accel_data['y'], accel_data['z']) * 180/np.pi
 		    </code>
+		    <br>
+		    <h2> Bluetooth </h2>
 		    <p>
-			    After adding this logic to the code using the numpy library in Python, the RPi code worked in the same way as the Arduino 
-			    code was working. We also found out that the loose connections were originating from the soldered pins on the IMU, so we 
-			    resoldered the pins to fix the problem. The measurements became consistent and stable after fixing all the issues, and we 
-			    were able to move onto the next part of our project.
+			    One of the most important parts of our project was the bluetooth connections. We first learned basic bluetooth commands in Linux, 
+			    such as bluetoothctl, discoverable on, pair on, etc. Then we downloaded the Blue Dot package and used their sample code to establish
+			    a connection between one of the RPi 0s and the RPi 4. However, we ran into a problem in which it gave an error message that says the 
+			    bluetooth connection already exists, even though we turned off the pairing. We consulted with another group (Jonas Funk and Antti 
+			    Meriluoto) in class; they were also using bluetooth between a RPi 4 and a RPi 0, and they recommended using a different bluetooth 
+			    library called PyBluez. We were able to use their send/receive code and modify it for our project. EXPLAIN HOW THE CODE WORKS! The
+			    link to our send.py and listen.py code files can be found in the Code Appendix section. The PyBluez package had its own GUI to enable
+			    bluetooth and connect the devices, which made the setup process much easier.
+		    </p>
+		    <p>
+			    Next, we merged the IMU measurements code into the bluetooth code so we can send the measured data over bluetooth. The data that were 
+			    sent from RPi 0 were in the form of a string, and they were converted to floats on the RPi 4 side. We also included a 0.5 seconds 
+			    time.sleep() delay to prevent the measurements from being transmitted too quickly, as the servo movements can be less accurate when there
+			    are too many values in a short period of time.
+		    </p>
+		    <p>
+			    Finally, we worked on auto-connecting the two RPis at startup and connecting the two RPi 0s with the RPi 4 at the same time.
+			    At first, we thought we would need to include extra lines of code to enable the auto-connect, but we discovered that the 
+			    devices would connect automatically at startup if they have been paired and stayed connected until the shutdown. To connect
+			    two RPi 0s to one RPi 4, we set up two ports on the RPi 4, and stored the data in two different variables. While working on
+			    this part, we faced a small problem where the RPi 4 would sometimes be confused with the two ports working simultaneously, 
+			    and receive multiple values as one long string. Since each value contained a decimal point, it would fail to convert the long
+			    string into a float, and crash the program. We were able to fix this error by filtering out such data; we simply added a 
+			    conditional statement so that the variables would store the value only if the length of the transmitted string is less than 
+			    30 characters.
 		    </p>
 
+		    <br>
+		<h2> Bluetooth </h2>
+		    <p> 
+			    We received two IMUs from Prof. Skovira, which had 6 degrees of freedom. The code we used to read in the measured data from the 
+			    IMUs can be found in the References section of this website. Although we were able to print the measured data on the terminal
+			    window without any error, the values seemed to be inconsistent; they did not have any pattern even when we moved the IMU in 
+			    one direction. In addition, we observed that the connections between the IMU and the Raspberry Pi 0 board are often disconnected
+			    and stopped the program by throwing an error, which we temporarily fixed by implementing a try-except statement and thus skipping
+			    the measurement whenever the connections become loose.
+		    </p>
 		    
 	    	<img src="assets/img/RemyAndLinguini.gif" alt="Remi and Linguini" width=50% height=auto/>
 	    </div>
