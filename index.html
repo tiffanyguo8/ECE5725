@@ -66,6 +66,13 @@
         <!-- Projects-->
 	<section class="projects-section bg-light" id="projects">
 	    <div class="container px-4 px-lg-5">
+		<h1> Project Objective </h1>
+		    Our project uses embedded operating systems to recreate the classic <i>Ratatouille</i> scene where Remy the rat pulls on Linguini the chef's
+		    hair in order to control his arm movements and cook the perfect dish. Instead of being controlled by the rat, our project will allow
+		    the rat's silhouette in the hat to mimic the motion of the wearer using servo motors, IMU sensors, and Bluetooth. The goal is to make
+		    it seem as if there is a real rat inside the hat controlling the chef's every move!
+		    <a href="https://www.youtube.com/watch?v=GuM8vTq0jd4">Video Placeholder</a>
+		    <br>
 		<h1> Introduction </h1>
 		<p> Ratatouille hat in real life. In the 2007 Pixar film Ratatouille, Remy the rat controls Alfredo Linguini’s hand movements via pulling strands of hair on his head. Hiding underneath Linguini’s chef’s hat, Remy guides the talentless chef to cook up many tasty dishes.
                             <br>As untalented chefs, we recreated the hat from the movie in hopes of getting the same experience of being controlled by Remy. 
@@ -81,6 +88,7 @@
 				to ensure their functionality before incrementally integrating them into our final prototype.
 			</p>
 		    <img class="img-fluid" src="assets/img/drawing.jpg" alt="Blueprint" width=30% height=auto />
+		    <br>
 		    <br>
 		<h2> Gyroscope </h2>
 		    <p> 
@@ -138,6 +146,7 @@
 			    conditional statement so that the variables would store the value only if the length of the transmitted string is less than 
 			    30 characters.
 		    </p>
+		    <br>
 		    <h2> Servo motors </h2>
 		    <p>
 			    We used two 9g micro servos to rotate the rat's arms. The servos had to be small enough to fit behind the rat's body; they 
@@ -188,6 +197,7 @@
 			    we found in the lab and glued it onto the plate to maximize friction. With these additional parts to the hat, we were able to wear the hat 
 			    during the demo.
 		    </p>
+		    <br>
 		    <h2> Startup timing with crontab </h2>
 		    <p>
 			    One extra component we implmemented was using crontab to automatically start the client and server processes. We connected our RPis to a computer 
@@ -220,6 +230,7 @@
 			    and testing methodology helped us to build up our system accurately and reliably, which ultimately let to our successful integration of the Rat in
 			    the Hat. One unexpected problem we did encounter was the interaction of the Pi Zero's Bluetooth module with crontab during reboot which caused us to
 			    make some changes in the way we start up our system. However, we were still able to carry out a successful demonstration and bring the little rat to life. 
+		    </p>
 		    <br>
 		    <h1> Future Work </h1>
 		    <p>
@@ -265,7 +276,7 @@
 		    </ul>
 		    <br>
 		    <h1> Code Appendix </h1>
-		    include link to code
+		    <p> Complete code hosted on GitHub: <a href="https://github.com/tiffanyguo8/ECE4160-code"</a>
 		    
 		    <!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #f92672">import</span> <span style="color: #f8f8f2">bluetooth</span>
 
