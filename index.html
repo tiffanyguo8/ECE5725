@@ -150,79 +150,7 @@
 	    </div>
 	</section>
 	    
-        <section class="projects-section bg-light" id="projects">
-            <div class="container px-4 px-lg-5">
-                <!-- Featured Project Row-->
-                <div class="row gx-0 mb-4 mb-lg-5 align-items-center">
-                    <div class="col-xl-8 col-lg-7"><img class="img-fluid mb-3 mb-lg-0" src="assets/img/RemyAndLinguini.gif" alt="..." /></div>
-                    <div class="col-xl-4 col-lg-5">
-                        <div class="featured-text text-center text-lg-left">
-                            <h4>Introduction</h4>
-                            <p class="text-black-50 mb-0">Ratatouille hat in real life. In the 2007 Pixar film Ratatouille, Remy the rat controls Alfredo Linguini’s hand movements via pulling strands of hair on his head. Hiding underneath Linguini’s chef’s hat, Remy guides the talentless chef to cook up many tasty dishes.
-                            <br>As untalented chefs, we recreated the hat from the movie in hopes of getting the same experience of being controlled by Remy. 
-                                The chef only needs a few pieces of equipment to start cooking: two wristbands and a chef's hat. As the Bluetooth-connected Raspberry Pi 4 inside the hat receives IMU measurements from the two Raspberry Pi Zeros attached to the wristbands, the rat's arm movements will be in sync with those of the chef.
-                                The silhouette of the hardworking rat moving its arms will be visible while <em>you</em> are cooking!</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Project One Row-->
-                <div class="row gx-0 mb-5 mb-lg-0 justify-content-center">
-                    <div class="col-lg-6"><img class="img-fluid" src="assets/img/ratatouille_team.jpg" alt="..." /></div>
-                    <div class="col-lg-6">
-                        <div class="bg-black text-center h-100 project">
-                            <div class="d-flex h-100">
-                                <div class="project-text w-100 my-auto text-center text-lg-left">
-                                    <h4 class="text-white">Misty</h4>
-                                    <p class="mb-0 text-white-50">An example of where you can put an image of a project, or anything else, along with a description.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Project Two Row-->
-                <div class="row gx-0 justify-content-center">
-                    <div class="col-lg-6"><img class="img-fluid" src="assets/img/demo-image-02.jpg" alt="..." /></div>
-                    <div class="col-lg-6 order-lg-first">
-                        <div class="bg-black text-center h-100 project">
-                            <div class="d-flex h-100">
-                                <div class="project-text w-100 my-auto text-center text-lg-right">
-                                    <h4 class="text-white">Mountains</h4>
-                                    <p class="mb-0 text-white-50">Another example of a project with its respective description. These sections work well responsively as well!</p>
-                                        <a href="https://github.com/tiffanyguo8/ECE5725/tree/main/code">Github repository</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Project Two Row-->
-                <div class="row gx-0 justify-content-center">
-                    <div class="col-lg-6">
-			    <div class="bg-black h-100 project">
-                            <div class="d-flex h-100">
-                                <div class="project-text w-100 my-auto">
-                                    <h4 class="text-white">Server</h4>
-                        <!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #f92672">import</span> <span style="color: #f8f8f2">bluetooth</span>
-
-			<span style="color: #f8f8f2">hostMACAddress</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&quot;B8:27:EB:86:9F:CA&quot;</span>
-			<span style="color: #f8f8f2">port</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">3</span>
-			<span style="color: #f8f8f2">backlog</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">1</span>
-			<span style="color: #f8f8f2">size</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">1024</span>
-			<span style="color: #f8f8f2">s</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">bluetooth</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">BluetoothSocket(bluetooth</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">RFCOMM)</span>
-			<span style="color: #f8f8f2">s</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">bind((hostMACAddress,</span> <span style="color: #f8f8f2">port))</span>
-			<span style="color: #f8f8f2">s</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">listen(backlog)</span>
-			<span style="color: #66d9ef">try</span><span style="color: #f8f8f2">:</span>
-				<span style="color: #f8f8f2">client,</span> <span style="color: #f8f8f2">clientInfo</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">s</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">accept()</span>
-				<span style="color: #66d9ef">while</span> <span style="color: #f8f8f2">True:</span>
-					<span style="color: #f8f8f2">data</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">client</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">recv(size)</span>
-					<span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">data:</span>
-						<span style="color: #66d9ef">print</span><span style="color: #f8f8f2">(data)</span>
-						<span style="color: #f8f8f2">client</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">send(data)</span>
-			<span style="color: #66d9ef">except</span><span style="color: #f8f8f2">:</span>
-				<span style="color: #66d9ef">print</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;Closing socket&quot;</span><span style="color: #f8f8f2">)</span>
-				<span style="color: #f8f8f2">client</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">close()</span>
-				<span style="color: #f8f8f2">s</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">close()</span>
-			</pre></div>
-
+       
                     </div>
                     <div class="col-lg-6 order-lg-first">
                         <div class="bg-black h-100 project">
@@ -260,13 +188,6 @@
 					<span style="color: #f8f8f2">client_socket</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">close()</span>
 					</pre></div>
 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
         <!-- Footer-->
         <footer class="footer bg-black small text-center text-white-50"><div class="container px-4 px-lg-5">Copyright &copy; Rat in the Hat 2023</div></footer>
         <!-- Bootstrap core JS-->
