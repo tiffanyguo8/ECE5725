@@ -74,10 +74,10 @@
 			    it seem as if there is a real rat inside the hat controlling the chef's every move!
 		    </p>
 		    <img src="assets/img/RemyAndLinguini.gif" alt="Remi and Linguini" width=50% height=auto/>
-		    <br>
+		    <br><br>
 		<h1> Video </h1>
 		    <a href="https://www.youtube.com/watch?v=GuM8vTq0jd4">Video Placeholder</a>
-		    <br>
+		    <br><br>
 		<h1> Introduction </h1>
 		<p> In the 2007 Pixar film Ratatouille, Remy the rat controls Alfredo Linguini’s hand movements by pulling strands of hair on his head. 
 			Hiding underneath Linguini’s chef’s hat, Remy guides the talentless chef to cook up many tasty dishes.
@@ -132,38 +132,35 @@
 			    bluetooth connection already exists, which persisted even after we turned off the pairing. We consulted with another group (Jonas Funk and Antti Meriluoto) 
 			    in our lab; they were also using bluetooth between a RPi 4 and a RPi 0, and they recommended us to use the PyBluez library. 
 			    Thanks to them, we were able to use their send/receive code and modify it for our project. Most of the work was done by the Bluez package, so we could 
-			    successfully connect the two RPis by including the server address in the send.py file and enabling the server sockets and ports 
-			    in the listen.py file. The send.py and listen.py code can be found in the Code Appendix section. The PyBluez package also had its own GUI 
+			    successfully connect the two RPis by including the server address in the send.py file and connecting the server sockets and ports 
+			    in the listen.py file. The send.py and listen.py code can be found in the Code Appendix section. The PyBluez package also has its own GUI 
 			    to enable bluetooth and connect the devices, which made the setup process much easier.
 		    </p>
 		    <p>
-			    Next, we merged the IMU measurements code into the bluetooth code so we can send the measured data over bluetooth. The data that were 
-			    sent from RPi 0 were in the form of a string, and they were converted to floats on the RPi 4 side. We also included a 0.5 seconds 
+			    Next, we merged the IMU measurement code with the bluetooth code so we can send the measured data over bluetooth. The data that were 
+			    sent from RPi 0 were in the form of a string, and they were converted to floats on the RPi 4 side. We also included a 0.5 second 
 			    time.sleep() delay to prevent the measurements from being transmitted too quickly, as the servo movements can be less accurate when there
 			    are too many values in a short period of time.
 		    </p>
 		    <p>
 			    Finally, we worked on auto-connecting the two RPis at startup and connecting the two RPi 0s with the RPi 4 at the same time.
 			    At first, we thought we would need to include extra lines of code to enable the auto-connect, but we discovered that the 
-			    devices would connect automatically at startup if they have been paired and stayed connected until the shutdown. To connect
-			    two RPi 0s to one RPi 4, we set up two ports on the RPi 4, and stored the data in two different variables. While working on
-			    this part, we faced a small problem where the RPi 4 would sometimes be confused with the two ports working simultaneously, 
+			    devices would connect automatically at startup if they had previously been paired and stayed connected until shutdown. To connect
+			    two RPi 0s to one RPi 4, we set up two ports on the RPi 4 and stored the data received from each RPi 0 in a different variable. While working on
+			    this part, we faced a small problem where the RPi 4 would sometimes be confused with the two ports working simultaneously 
 			    and receive multiple values as one long string. Since each value contained a decimal point, it would fail to convert the long
-			    string into a float, and crash the program. We were able to fix this error by filtering out such data; we simply added a 
-			    conditional statement so that the variables would store the value only if the length of the transmitted string is less than 
+			    string into a float and crash the program. We were able to fix this error by filtering out corrupted data; we simply added a 
+			    conditional statement so that the variables would only store the value and attempt to convert it to a float if the length of the transmitted string is less than 
 			    30 characters.
 		    </p>
 		    <br>
 		    <h2> Servo motors </h2>
 		    <p>
-			    We used two 9g micro servos to rotate the rat's arms. The servos had to be small enough to fit behind the rat's body; they 
-			    would be part of the shadow otherwise. The servos were positional, and we mapped the angles from the IMUs to be between -1 
-			    and 1 to move the servos. We also capped the maximum and minimum angles to be ??? degrees, to prevent the arms from moving 
-			    beyond that angle and causing unnatural movements.
-		    </p>
-		    <p>
-			    We used the GPIO pins on RPi 4 for the servos. Since we used PWM and servos in Lab 3 this semester, we were able to reuse our 
-			    Lab 3 code to set up the servos.
+			    We used two 9g Micro Servos to rotate the rat's arms. The servos had to be small enough to fit behind the rat's body; they 
+			    would be part of the shadow otherwise. The servos were positional, so we mapped the angles from the IMUs to be the range [-1, 1] 
+			    and used the GPIO Zero library to move the servos. We used GPIO pins 13 and 19 on the RPi 4 to drive the servos. 
+			    We also capped the maximum and minimum angles on the rat's arms to be between -90 and 90 degrees to 
+			    prevent the arms from making unnatural movements.
 		    </p>
 		    <br>
 		    <h2> Hardware integration </h2>
@@ -234,7 +231,7 @@
 				    <li> Finish prototype and prepare for demo </li>
 		   	     </ol>
 			    Our iterative design
-			    and testing methodology helped us to build up our system accurately and reliably, which ultimately let to our successful integration of the Rat in
+			    and testing methodology helped us to build up our system accurately and reliably, which ultimately led to our successful integration of the Rat in
 			    the Hat. One unexpected problem we did encounter was the interaction of the Pi Zero's Bluetooth module with crontab during reboot which caused us to
 			    make some changes in the way we start up our system. However, we were still able to carry out a successful demonstration and bring the little rat to life. 
 		    </p>
@@ -280,13 +277,14 @@
 		     <ul>
 				    <li> Antti and Jonas’s code </li>
 				    <li> <a href="https://www.hotmcu.com/gy521-mpu6050-3axis-acceleration-gyroscope-6dof-module-p-83.html"> IMU datasheet and Arduino code </a> </li>
+			     	    <li> <a href="https://pybluez.readthedocs.io/en/latest/"> PyBluez documentation </a> </li>
 		    </ul>
 		    <br>
 		    <h1> Code Appendix </h1>
 		    <p> Complete code hosted on GitHub: <a href="https://github.com/tiffanyguo8/ECE5725/tree/main/code">https://github.com/tiffanyguo8/ECE5725/tree/main/code</a>
 		    
 				<br>
-		    
+		<h5> send.py </h5>
                                 <!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #f92672">import</span> <span style="color: #f8f8f2">bluetooth</span>
 				<span style="color: #f92672">import</span> <span style="color: #f8f8f2">time</span>
 				<span style="color: #f92672">from</span> <span style="color: #f8f8f2">mpu6050</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">mpu6050</span>
@@ -319,89 +317,89 @@
 				</pre></div>
 		
 		<br>
-		
-		<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #f92672">import</span> <span style="color: #f8f8f2">bluetooth</span>
-		<span style="color: #f92672">from</span> <span style="color: #f8f8f2">gpiozero</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">Servo</span>
-		<span style="color: #f92672">import</span> <span style="color: #f8f8f2">time</span>
-		<span style="color: #f92672">import</span> <span style="color: #f8f8f2">struct</span>
-		<span style="color: #f92672">import</span> <span style="color: #f8f8f2">RPi.GPIO</span> <span style="color: #f92672">as</span> <span style="color: #f8f8f2">GPIO</span>
+	<h5> listen.py </h5>
+				<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #f92672">import</span> <span style="color: #f8f8f2">bluetooth</span>
+				<span style="color: #f92672">from</span> <span style="color: #f8f8f2">gpiozero</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">Servo</span>
+				<span style="color: #f92672">import</span> <span style="color: #f8f8f2">time</span>
+				<span style="color: #f92672">import</span> <span style="color: #f8f8f2">struct</span>
+				<span style="color: #f92672">import</span> <span style="color: #f8f8f2">RPi.GPIO</span> <span style="color: #f92672">as</span> <span style="color: #f8f8f2">GPIO</span>
 
 
-		<span style="color: #f8f8f2">GPIO</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">setmode(GPIO</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">BCM)</span>
-		<span style="color: #f8f8f2">GPIO</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">setup(</span><span style="color: #ae81ff">12</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">GPIO</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">OUT)</span>
+				<span style="color: #f8f8f2">GPIO</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">setmode(GPIO</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">BCM)</span>
+				<span style="color: #f8f8f2">GPIO</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">setup(</span><span style="color: #ae81ff">12</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">GPIO</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">OUT)</span>
 
-		<span style="color: #f8f8f2">GPIO</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">output(</span><span style="color: #ae81ff">12</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">GPIO</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">HIGH)</span>
+				<span style="color: #f8f8f2">GPIO</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">output(</span><span style="color: #ae81ff">12</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">GPIO</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">HIGH)</span>
 
-		<span style="color: #f8f8f2">servo_left</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">Servo(</span><span style="color: #ae81ff">13</span><span style="color: #f8f8f2">)</span>
-		<span style="color: #f8f8f2">servo_right</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">Servo(</span><span style="color: #ae81ff">19</span><span style="color: #f8f8f2">)</span>
+				<span style="color: #f8f8f2">servo_left</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">Servo(</span><span style="color: #ae81ff">13</span><span style="color: #f8f8f2">)</span>
+				<span style="color: #f8f8f2">servo_right</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">Servo(</span><span style="color: #ae81ff">19</span><span style="color: #f8f8f2">)</span>
 
-		<span style="color: #75715e"># Create a Bluetooth socket and bind it to a port</span>
-		<span style="color: #f8f8f2">server_socket1</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">bluetooth</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">BluetoothSocket(bluetooth</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">RFCOMM)</span>
-		<span style="color: #f8f8f2">server_socket2</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">bluetooth</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">BluetoothSocket(bluetooth</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">RFCOMM)</span>
-		<span style="color: #f8f8f2">server_socket1</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">bind((</span><span style="color: #e6db74">&quot;&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">1</span><span style="color: #f8f8f2">))</span>
-		<span style="color: #f8f8f2">server_socket2</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">bind((</span><span style="color: #e6db74">&quot;&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">2</span><span style="color: #f8f8f2">))</span>
+				<span style="color: #75715e"># Create a Bluetooth socket and bind it to a port</span>
+				<span style="color: #f8f8f2">server_socket1</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">bluetooth</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">BluetoothSocket(bluetooth</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">RFCOMM)</span>
+				<span style="color: #f8f8f2">server_socket2</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">bluetooth</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">BluetoothSocket(bluetooth</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">RFCOMM)</span>
+				<span style="color: #f8f8f2">server_socket1</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">bind((</span><span style="color: #e6db74">&quot;&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">1</span><span style="color: #f8f8f2">))</span>
+				<span style="color: #f8f8f2">server_socket2</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">bind((</span><span style="color: #e6db74">&quot;&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">2</span><span style="color: #f8f8f2">))</span>
 
-		<span style="color: #75715e"># Listen for incoming Bluetooth connections</span>
-		<span style="color: #f8f8f2">server_socket1</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">listen(</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">)</span>
-		<span style="color: #f8f8f2">server_socket2</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">listen(</span><span style="color: #ae81ff">2</span><span style="color: #f8f8f2">)</span>
+				<span style="color: #75715e"># Listen for incoming Bluetooth connections</span>
+				<span style="color: #f8f8f2">server_socket1</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">listen(</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">)</span>
+				<span style="color: #f8f8f2">server_socket2</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">listen(</span><span style="color: #ae81ff">2</span><span style="color: #f8f8f2">)</span>
 
-		<span style="color: #75715e"># Get the port number assigned to the socket</span>
-		<span style="color: #f8f8f2">port1</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">server_socket1</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">getsockname()[</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">]</span>
-		<span style="color: #f8f8f2">port2</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">server_socket2</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">getsockname()[</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">]</span>
+				<span style="color: #75715e"># Get the port number assigned to the socket</span>
+				<span style="color: #f8f8f2">port1</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">server_socket1</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">getsockname()[</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">]</span>
+				<span style="color: #f8f8f2">port2</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">server_socket2</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">getsockname()[</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">]</span>
 
-		<span style="color: #75715e"># Print the port number to the console</span>
-		<span style="color: #66d9ef">print</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;Waiting for connection on RFCOMM channel&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">port1)</span>
-		<span style="color: #66d9ef">print</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;Waiting for connection on RFCOMM channel&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">port2)</span>
+				<span style="color: #75715e"># Print the port number to the console</span>
+				<span style="color: #66d9ef">print</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;Waiting for connection on RFCOMM channel&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">port1)</span>
+				<span style="color: #66d9ef">print</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;Waiting for connection on RFCOMM channel&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">port2)</span>
 
-		<span style="color: #75715e"># Accept an incoming Bluetooth connection</span>
-		<span style="color: #f8f8f2">client_socket1,</span> <span style="color: #f8f8f2">client_info1</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">server_socket1</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">accept()</span>
-		<span style="color: #66d9ef">print</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;Accepted connection from&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">client_info1)</span>
+				<span style="color: #75715e"># Accept an incoming Bluetooth connection</span>
+				<span style="color: #f8f8f2">client_socket1,</span> <span style="color: #f8f8f2">client_info1</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">server_socket1</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">accept()</span>
+				<span style="color: #66d9ef">print</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;Accepted connection from&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">client_info1)</span>
 
-		<span style="color: #f8f8f2">client_socket2,</span> <span style="color: #f8f8f2">client_info2</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">server_socket2</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">accept()</span>
-		<span style="color: #66d9ef">print</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;Accepted connection from&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">client_info2)</span>
+				<span style="color: #f8f8f2">client_socket2,</span> <span style="color: #f8f8f2">client_info2</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">server_socket2</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">accept()</span>
+				<span style="color: #66d9ef">print</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;Accepted connection from&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">client_info2)</span>
 
-		<span style="color: #75715e"># Map gyroscope data to [-90, 90] range and cap values that exceed the max/min.</span>
-		<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">convert</span><span style="color: #f8f8f2">(gyro):</span>
-		    <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">(gyro</span> <span style="color: #f92672">&lt;=</span> <span style="color: #f92672">-</span><span style="color: #ae81ff">90</span><span style="color: #f8f8f2">):</span>
-			<span style="color: #66d9ef">return</span> <span style="color: #f92672">-</span><span style="color: #ae81ff">1</span>
-		    <span style="color: #66d9ef">elif</span> <span style="color: #f8f8f2">(gyro</span> <span style="color: #f92672">&gt;=</span> <span style="color: #ae81ff">90</span><span style="color: #f8f8f2">):</span> 
-			<span style="color: #66d9ef">return</span> <span style="color: #ae81ff">1</span>
-		    <span style="color: #66d9ef">else</span><span style="color: #f8f8f2">:</span>
-			<span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">gyro</span> <span style="color: #f92672">/</span> <span style="color: #ae81ff">90</span>
+				<span style="color: #75715e"># Map gyroscope data to [-1, 1] range and cap values that exceed the max/min.</span>
+				<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">convert</span><span style="color: #f8f8f2">(gyro):</span>
+				    <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">(gyro</span> <span style="color: #f92672">&lt;=</span> <span style="color: #f92672">-</span><span style="color: #ae81ff">90</span><span style="color: #f8f8f2">):</span>
+					<span style="color: #66d9ef">return</span> <span style="color: #f92672">-</span><span style="color: #ae81ff">1</span>
+				    <span style="color: #66d9ef">elif</span> <span style="color: #f8f8f2">(gyro</span> <span style="color: #f92672">&gt;=</span> <span style="color: #ae81ff">90</span><span style="color: #f8f8f2">):</span> 
+					<span style="color: #66d9ef">return</span> <span style="color: #ae81ff">1</span>
+				    <span style="color: #66d9ef">else</span><span style="color: #f8f8f2">:</span>
+					<span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">gyro</span> <span style="color: #f92672">/</span> <span style="color: #ae81ff">90</span>
 
-		<span style="color: #75715e"># Receive data from the client</span>
-		<span style="color: #f8f8f2">begin_time</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">time</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">time()</span>
-		<span style="color: #66d9ef">while</span> <span style="color: #f8f8f2">time</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">time()</span> <span style="color: #f92672">&lt;</span> <span style="color: #f8f8f2">begin_time</span> <span style="color: #f92672">+</span> <span style="color: #ae81ff">600</span><span style="color: #f8f8f2">:</span>
-		    <span style="color: #66d9ef">try</span><span style="color: #f8f8f2">:</span>
-			<span style="color: #f8f8f2">data_left</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">client_socket1</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">recv(</span><span style="color: #ae81ff">1024</span><span style="color: #f8f8f2">)</span>
-			<span style="color: #f8f8f2">data_right</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">client_socket2</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">recv(</span><span style="color: #ae81ff">1024</span><span style="color: #f8f8f2">)</span>
+				<span style="color: #75715e"># Receive data from the client</span>
+				<span style="color: #f8f8f2">begin_time</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">time</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">time()</span>
+				<span style="color: #66d9ef">while</span> <span style="color: #f8f8f2">time</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">time()</span> <span style="color: #f92672">&lt;</span> <span style="color: #f8f8f2">begin_time</span> <span style="color: #f92672">+</span> <span style="color: #ae81ff">600</span><span style="color: #f8f8f2">:</span>
+				    <span style="color: #66d9ef">try</span><span style="color: #f8f8f2">:</span>
+					<span style="color: #f8f8f2">data_left</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">client_socket1</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">recv(</span><span style="color: #ae81ff">1024</span><span style="color: #f8f8f2">)</span>
+					<span style="color: #f8f8f2">data_right</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">client_socket2</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">recv(</span><span style="color: #ae81ff">1024</span><span style="color: #f8f8f2">)</span>
 
-			<span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">data_left:</span>
-			    <span style="color: #66d9ef">print</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;Received left:&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">data_left)</span>
-			    <span style="color: #66d9ef">if</span><span style="color: #f8f8f2">(len(data_left)</span> <span style="color: #f92672">&lt;</span> <span style="color: #ae81ff">30</span><span style="color: #f8f8f2">):</span>
-				<span style="color: #f8f8f2">data_left</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">float(data_left)</span>
-				<span style="color: #f8f8f2">pwm_left</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">convert(data_left)</span>
-				<span style="color: #f8f8f2">servo_left</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">value</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">pwm_left</span>
+					<span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">data_left:</span>
+					    <span style="color: #66d9ef">print</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;Received left:&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">data_left)</span>
+					    <span style="color: #66d9ef">if</span><span style="color: #f8f8f2">(len(data_left)</span> <span style="color: #f92672">&lt;</span> <span style="color: #ae81ff">30</span><span style="color: #f8f8f2">):</span>
+						<span style="color: #f8f8f2">data_left</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">float(data_left)</span>
+						<span style="color: #f8f8f2">pwm_left</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">convert(data_left)</span>
+						<span style="color: #f8f8f2">servo_left</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">value</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">pwm_left</span>
 
-			<span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">data_right:</span>
-			    <span style="color: #66d9ef">print</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;Received right:&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">data_right)</span>
-			    <span style="color: #66d9ef">if</span><span style="color: #f8f8f2">(len(data_right)</span> <span style="color: #f92672">&lt;</span> <span style="color: #ae81ff">30</span><span style="color: #f8f8f2">):</span>
-				<span style="color: #f8f8f2">data_right</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">float(data_right)</span>
-				<span style="color: #f8f8f2">pwm_right</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">convert(data_right)</span>
-				<span style="color: #f8f8f2">servo_right</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">value</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">pwm_right</span>
+					<span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">data_right:</span>
+					    <span style="color: #66d9ef">print</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;Received right:&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">data_right)</span>
+					    <span style="color: #66d9ef">if</span><span style="color: #f8f8f2">(len(data_right)</span> <span style="color: #f92672">&lt;</span> <span style="color: #ae81ff">30</span><span style="color: #f8f8f2">):</span>
+						<span style="color: #f8f8f2">data_right</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">float(data_right)</span>
+						<span style="color: #f8f8f2">pwm_right</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">convert(data_right)</span>
+						<span style="color: #f8f8f2">servo_right</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">value</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">pwm_right</span>
 
-		    <span style="color: #66d9ef">except</span> <span style="color: #f8f8f2">bluetooth</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">btcommon</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">BluetoothError</span> <span style="color: #66d9ef">as</span> <span style="color: #f8f8f2">error:</span>
-			<span style="color: #66d9ef">print</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;Bluetooth connection error:&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">error)</span>
-			<span style="color: #66d9ef">break</span>
+				    <span style="color: #66d9ef">except</span> <span style="color: #f8f8f2">bluetooth</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">btcommon</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">BluetoothError</span> <span style="color: #66d9ef">as</span> <span style="color: #f8f8f2">error:</span>
+					<span style="color: #66d9ef">print</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;Bluetooth connection error:&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">error)</span>
+					<span style="color: #66d9ef">break</span>
 
-		<span style="color: #75715e"># Close the client socket and the server socket</span>
-		<span style="color: #f8f8f2">client_socket1</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">close()</span>
-		<span style="color: #f8f8f2">server_socket1</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">close()</span>
-		<span style="color: #f8f8f2">client_socket2</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">close()</span>
-		<span style="color: #f8f8f2">server_socket2</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">close()</span>
+				<span style="color: #75715e"># Close the client socket and the server socket</span>
+				<span style="color: #f8f8f2">client_socket1</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">close()</span>
+				<span style="color: #f8f8f2">server_socket1</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">close()</span>
+				<span style="color: #f8f8f2">client_socket2</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">close()</span>
+				<span style="color: #f8f8f2">server_socket2</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">close()</span>
 
-		<span style="color: #f8f8f2">GPIO</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">cleanup()</span>
-		</pre></div>
+				<span style="color: #f8f8f2">GPIO</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">cleanup()</span>
+				</pre></div>
 
 		<br>
 		    <h1> Contributions & Contact </h1>
