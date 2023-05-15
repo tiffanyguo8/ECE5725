@@ -111,13 +111,14 @@
 		    <h2> Bluetooth </h2>
 		    <p>
 			    One of the most important parts of our project was the bluetooth connections. We first learned basic bluetooth commands in Linux, 
-			    such as bluetoothctl, discoverable on, pair on, etc. Then we downloaded the Blue Dot package and used their sample code to establish
+			    such as bluetoothctl, discoverable on, pair on, etc. Then we downloaded the Blue Dot package and used their sample code to establish 
 			    a connection between one of the RPi 0s and the RPi 4. However, we ran into a problem in which it gave an error message that says the 
-			    bluetooth connection already exists, even though we turned off the pairing. We consulted with another group (Jonas Funk and Antti 
-			    Meriluoto) in class; they were also using bluetooth between a RPi 4 and a RPi 0, and they recommended using a different bluetooth 
-			    library called PyBluez. We were able to use their send/receive code and modify it for our project. EXPLAIN HOW THE CODE WORKS! The
-			    link to our send.py and listen.py code files can be found in the Code Appendix section. The PyBluez package had its own GUI to enable
-			    bluetooth and connect the devices, which made the setup process much easier.
+			    bluetooth connection already exists, even though we turned off the pairing. We consulted with another group (Jonas Funk and Antti Meriluoto) 
+			    in class; they were also using bluetooth between a RPi 4 and a RPi 0, and they recommended using a different bluetooth library called PyBluez. 
+			    We were able to use their send/receive code and modify it for our project. Most of the work was done by the Bluez package, so we could 
+			    successfully connect the two RPis by including the server address (RPi 4’s) in the send.py file and enabling the server sockets and ports 
+			    in the listen.py file. The send.py and listen.py code can be found in the Code Appendix section. The PyBluez package also had its own GUI 
+			    to enable bluetooth and connect the devices, which made the setup process much easier.
 		    </p>
 		    <p>
 			    Next, we merged the IMU measurements code into the bluetooth code so we can send the measured data over bluetooth. The data that were 
