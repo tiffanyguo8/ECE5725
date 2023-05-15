@@ -147,6 +147,45 @@
 			    Lab 3 code to set up the servos.
 		    </p>
 		    <br>
+		    <h2> Hardware integration </h2>
+		    <p>
+			    We paid extra attention to the construction of the chef’s hat, since our project relied heavily on the visual presentation. 
+			    We had to be able to clearly see the rat’s silhouette and recognize that it is moving its arms in sync with the chef. For better 
+			    stability of the hat, we decided to create our own hat rather than buying a premade chef’s hat. We used a paper plate for the base 
+			    and glued a piece of copy paper around the base to make it look like a chef’s hat. We created two prototypes, and later we found
+			    having two hats very helpful, because we had to take all the parts in and out many times to adjust the silhouette, edit something 
+			    in the code and test it, fix the wiring connections, etc. Since the hat is made of regular copy paper, it was easy to be crumpled; 
+			    having an extra hat allowed us to present a relatively cleaner-looking project as a result.
+		    </p>
+		    <p>
+			    The shadow of the rat was cut out of a piece of cardboard. We cut out the rat’s body and arms separately so we can attach the arms 
+			    onto the servos and make them move. In the movie, Remy the rat pulls Linguini’s hair to control him, but we decided to have our Remy 
+			    hold a spoon and a knife in each hand. This way, it would be easier for other people to understand that the project was inspired by 
+			    the movie Ratatouille, and the shadow of the arm movements will be more clearly visible.
+		    </p>
+		    <p>
+			    We had originally planned to use an LED to generate the shadow on the side of the hat. Since the breadboard and RPi 4 were already 
+			    inside the hat, we added code to turn on the LED to listen.py. However, when we assembled the hat, we realized that the LED is not 
+			    bright enough to make the shadow visible. We tried putting three LEDs in parallel to increase the brightness, but it was still not 
+			    enough, and the silhouette still looked too blurry. We talked about this problem with Prof. Skovira, and he lent us a small flashlight. 
+			    With the increased brightness, we were able to see the clear shadow of the rat.
+		    </p>
+		    <p>
+			    In addition, the RPi 0s, IMUs, and portable batteries for the RPi 0s had to be attached to the chef’s arms. We first thought of simply 
+			    holding a RPi 0 in each hand, but we wanted to make the system look as similar to the movie as possible. We also wanted to hold a knife 
+			    and a spoon during the demo, so we decided to make wristbands out of cardboards and velcros. By using velcros, we were able to wear and 
+			    take off the wristbands, and freely adjust the wristbands’ widths when other people wanted to try our project out.
+		    </p>
+		    <p>
+			    One of the challenges we faced was to balance the hat on the head. With the RPi 4, a breadboard, a portable battery, and a flashlight 
+			    being placed inside, the hat became much heavier than we had thought. Moreover, the base of the hat was a flat paper plate, which made 
+			    it even harder to balance on the head. We could have put the hat on a table during the demo, but it would defeat the purpose of this 
+			    whole project. To make the hat as stable as possible, we attached two strings to the base plate so we can tie them around the chin. We
+			    also observed that the coated side of the paper plate is making the hat easier to fall off the head, so we cut out a piece of sponge that
+			    we found in the lab and glued it onto the plate to maximize friction. With these additional parts to the hat, we were able to wear the hat 
+			    during the demo.
+		    </p>
+		    
 		    <!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #f92672">import</span> <span style="color: #f8f8f2">bluetooth</span>
 
  			<span style="color: #f8f8f2">hostMACAddress</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&quot;B8:27:EB:86:9F:CA&quot;</span>
