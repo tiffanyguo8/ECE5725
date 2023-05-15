@@ -75,11 +75,36 @@
 	    </div>
 	    <div class="container px-4 px-lg-5">
 		<h1> Design and Testing </h1>
-		<p> Ratatouille hat in real life. In the 2007 Pixar film Ratatouille, Remy the rat controls Alfredo Linguini’s hand movements via pulling strands of hair on his head. Hiding underneath Linguini’s chef’s hat, Remy guides the talentless chef to cook up many tasty dishes.
-                            <br>As untalented chefs, we recreated the hat from the movie in hopes of getting the same experience of being controlled by Remy. 
-                                The chef only needs a few pieces of equipment to start cooking: two wristbands and a chef's hat. As the Bluetooth-connected Raspberry Pi 4 inside the hat receives IMU measurements from the two Raspberry Pi Zeros attached to the wristbands, the rat's arm movements will be in sync with those of the chef.
-                                The silhouette of the hardworking rat moving its arms will be visible while <em>you</em> are cooking!
-		</p>
+			<p> We divided the project into 3 distinct components: gyroscopes, Bluetooth, and Servo motors. We individually implemented and tested each of these components
+				to ensure their functionality before incrementally integrating them into our final prototype.
+			</p>
+		<h2> Gyroscope </h2>
+		    <p> 
+			    We received two IMUs from Prof. Skovira, which had 6 degrees of freedom. The code we used to read in the measured data from the 
+			    IMUs can be found in the References section of this website. Although we were able to print the measured data on the terminal
+			    window without any error, the values seemed to be inconsistent; they did not have any pattern even when we moved the IMU in 
+			    one direction. In addition, we observed that the connections between the IMU and the Raspberry Pi 0 board are often disconnected
+			    and stopped the program by throwing an error, which we temporarily fixed by implementing a try-except statement and thus skipping
+			    the measurement whenever the connections become loose.
+		    </p>
+		    <p>
+			    To fix the inconsistency problem, we searched up the manufacturer’s website on the Internet, and found an Arduino version of 
+			    the code written by the manufacturer. We were able to borrow an Arduino Uno board from Prof. Skovira and test if the inconsistency 
+			    is resulting from our RPi code or the IMU. We observed that the measurements were consistent when we ran the Arduino code, so we 
+			    could conclude that the source of error must be from the RPi code. We soon realized that the IMU was measuring the angular velocities 
+			    and not the angles, and added the conversion logic to our code.
+		    </p>
+		    <code> 
+			    np.arctan2(accel_data['y'], accel_data['z']) * 180/np.pi
+		    </code>
+		    <p>
+			    After adding this logic to the code using the numpy library in Python, the RPi code worked in the same way as the Arduino 
+			    code was working. We also found out that the loose connections were originating from the soldered pins on the IMU, so we 
+			    resoldered the pins to fix the problem. The measurements became consistent and stable after fixing all the issues, and we 
+			    were able to move onto the next part of our project.
+		    </p>
+
+		    
 	    	<img src="assets/img/RemyAndLinguini.gif" alt="Remi and Linguini" width=50% height=auto/>
 	    </div>
 	</section>
